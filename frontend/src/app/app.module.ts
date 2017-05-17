@@ -1,15 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { AppComponent2 } from './app.component';
+import { AppComponent3 } from './app.component';
 import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppComponent2,
+    AppComponent3
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,9 @@ import { AuthService } from './services/auth/auth.service';
     AuthService
   ],
   bootstrap: [
-    AppComponent
+    AppComponent,
+    AppComponent2,
+    AppComponent3
   ]
 })
 export class AppModule { }
