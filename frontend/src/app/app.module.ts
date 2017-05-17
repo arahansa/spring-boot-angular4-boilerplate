@@ -5,15 +5,17 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AppComponent2 } from './app.component';
 import { AppComponent3 } from './app.component';
+import { HeroDetailComponent } from './hero-detail.component';
+
 import { AuthService } from './services/auth/auth.service';
+import {HeroService} from "./hero.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppComponent2,
-    AppComponent3
+    AppComponent3,
+    HeroDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -23,12 +25,13 @@ import { AuthService } from './services/auth/auth.service';
       {path: "**/*", component: AppComponent},
     ])
   ],
+
   providers: [
-    AuthService
+    AuthService,
+    HeroService
   ],
   bootstrap: [
     AppComponent,
-    AppComponent2,
     AppComponent3
   ]
 })
