@@ -7,31 +7,41 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppComponent3 } from './app.component';
 import { HeroDetailComponent } from './hero-detail.component';
-
+import { HeroesComponent }     from './heroes.component';
 import { AuthService } from './services/auth/auth.service';
 import {HeroService} from "./hero.service";
+import {DashboardComponent} from "./dashboard.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AppComponent3,
-    HeroDetailComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: "**/*", component: AppComponent},
+      /*{path: "**!/!*", component: AppComponent},*/
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full'
+      },
+      {path: 'heroes',component: HeroesComponent},
+      {path: 'dashboard',component: DashboardComponent},
+      {path: 'detail/:id',component: HeroDetailComponent},
     ])
   ],
-
+  declarations: [
+    /*AppComponent,*/
+    AppComponent3,
+    DashboardComponent,
+    HeroDetailComponent,
+    HeroesComponent
+  ],
   providers: [
-    AuthService,
+    /*AuthService,*/
     HeroService
   ],
   bootstrap: [
-    AppComponent,
+    /*AppComponent,*/
     AppComponent3
   ]
 })
