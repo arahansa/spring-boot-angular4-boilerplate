@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { HeroService } from './hero.service';
+import { Router } from "@angular/router";
 var HeroesComponent = (function () {
-    function HeroesComponent(heroService) {
+    function HeroesComponent(router, heroService) {
+        this.router = router;
         this.heroService = heroService;
         this.title = 'Tour of Heroes';
     }
@@ -24,6 +26,9 @@ var HeroesComponent = (function () {
     HeroesComponent.prototype.onSelect = function (hero) {
         this.selectedHero = hero;
     };
+    HeroesComponent.prototype.gotoDetail = function () {
+        this.router.navigate(['/detail', this.selectedHero.id]);
+    };
     return HeroesComponent;
 }());
 HeroesComponent = __decorate([
@@ -33,7 +38,8 @@ HeroesComponent = __decorate([
         styleUrls: ['./heroes.component.css'],
         providers: [HeroService]
     }),
-    __metadata("design:paramtypes", [HeroService])
+    __metadata("design:paramtypes", [Router,
+        HeroService])
 ], HeroesComponent);
 export { HeroesComponent };
 //# sourceMappingURL=/Users/jarvis/code/workspace/spring-boot-angular4-boilerplate/frontend_mine/src/app/heroes.component.js.map

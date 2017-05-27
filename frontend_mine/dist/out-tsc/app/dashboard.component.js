@@ -28,6 +28,7 @@ DashboardComponent = __decorate([
     Component({
         selector: 'my-dashboard',
         templateUrl: './dashboard.component.html',
+        styleUrls: ['./dashboard.component.css'],
     }),
     __metadata("design:paramtypes", [HeroService])
 ], DashboardComponent);
