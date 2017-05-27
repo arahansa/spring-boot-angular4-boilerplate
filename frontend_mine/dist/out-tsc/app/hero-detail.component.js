@@ -7,11 +7,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// Keep the Input import for now, you'll remove it later:
 import { Component, Input } from '@angular/core';
-import { Hero } from './hero';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { HeroService } from './hero.service';
+import { Hero } from "./hero";
+import 'rxjs/add/operator/switchMap';
 var HeroDetailComponent = (function () {
-    function HeroDetailComponent() {
+    function HeroDetailComponent(heroService, route, location) {
+        this.heroService = heroService;
+        this.route = route;
+        this.location = location;
     }
+    HeroDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) { return _this.heroService.getHero(+params['id']); })
+            .subscribe(function (hero) { return _this.hero = hero; });
+    };
+    HeroDetailComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     return HeroDetailComponent;
 }());
 __decorate([
@@ -21,8 +38,11 @@ __decorate([
 HeroDetailComponent = __decorate([
     Component({
         selector: 'hero-detail',
-        template: "\n    <div *ngIf=\"hero\">\n      <h2>{{hero.name}} details!</h2>\n      <div>\n        <label>id: </label>{{hero.id}}\n      </div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"hero.name\" placeholder=\"name\"/>\n      </div>\n    </div>\n  "
-    })
+        templateUrl: './hero-detail.component.html',
+    }),
+    __metadata("design:paramtypes", [HeroService,
+        ActivatedRoute,
+        Location])
 ], HeroDetailComponent);
 export { HeroDetailComponent };
 //# sourceMappingURL=/Users/jarvis/code/workspace/spring-boot-angular4-boilerplate/frontend_mine/src/app/hero-detail.component.js.map
