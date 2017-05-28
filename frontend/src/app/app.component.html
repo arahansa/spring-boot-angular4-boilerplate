@@ -1,3 +1,41 @@
 <div class="container">
   <router-outlet></router-outlet>
+
+  <!--username: string, email: string, password: string-->
+  <form>
+    유저네임 : <input #username />
+    이메일 :   <input #email />
+    패스워드 : <input #password />
+    <button  (click)="signUp(username.value, email.value, password.value)">클릭</button>
+  </form>
+
+  <hr>
+  <button (click)="getPolo()">폴로</button>
+  <button (click)="getCoinOne()">코인원</button>
+  <hr>
+
+  <div class="currency-layer" >
+    <h3>폴로</h3>
+    <div >
+    리플 :  {{currency_polo.btc_xrp}} <br>
+    이더 : {{currency_polo.btc_eth}}<br>
+    이클 : {{currency_polo.btc_etc}}<br>
+    대쉬 : {{currency_polo.btc_dash}}<br>
+    라이트 : {{currency_polo.btc_ltc}}<br>
+    </div>
+  </div>
+  <div class="currency-layer">
+    <h3>코인원</h3>
+    리플 : {{currency_coinone.btc_xrp}}<br>
+    이더 : {{currency_coinone.btc_eth}}<br>
+    이클 : {{currency_coinone.btc_etc}}<br>
+  </div>
+  <div class="currency-layer">
+    <h3>빗썸</h3>
+    리플 :<br>
+    이더 :<br>
+    이클 :<br>
+    라이트 :<br>
+    대시 :<br>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import com.app.entity.Role;
 import com.app.entity.User;
 import com.app.exception.InvalidPasswordException;
 import com.app.exception.UserNotFoundException;
+import com.app.repository.RoleRepository;
 import com.app.security.auth.JwtAuthenticationRequest;
 import com.app.security.auth.JwtAuthenticationResponse;
 import com.app.security.auth.JwtTokenUtil;
@@ -25,6 +26,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,6 +70,16 @@ public class AuthController extends BaseController {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    RoleRepository roleRepository;
+
+    @PostConstruct
+    public void setup(){
+        if(roleRepository.findOne(1L)==null){
+            roleRepository.save(new Role("USER"));
+        }
+    }
+
     @PostMapping(SIGNUP_URL)
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
@@ -76,7 +88,7 @@ public class AuthController extends BaseController {
         String email = authenticationRequest.getEmail();
         String password = authenticationRequest.getPassword();
         LOG.info("[POST] CREATING TOKEN FOR User " + name);
-        Role role  = new Role(1L, "USER");
+        Role role  = roleRepository.findOne(1L);
         userService.save(new User(name, email, password, role));
         JwtUser userDetails;
 

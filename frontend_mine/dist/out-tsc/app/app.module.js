@@ -18,6 +18,7 @@ import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { HeroSearchComponent } from "./hero-search.component";
+import { MySampleComponent } from "./mysample/mysample";
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,7 +38,8 @@ AppModule = __decorate([
             DashboardComponent,
             HeroDetailComponent,
             HeroesComponent,
-            HeroSearchComponent
+            HeroSearchComponent,
+            MySampleComponent,
         ],
         providers: [HeroService],
         bootstrap: [AppComponent]

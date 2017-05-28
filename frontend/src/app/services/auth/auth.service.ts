@@ -16,17 +16,18 @@ export class AuthService extends ReplaySubject<string> {
   private token: string;
   private username: string;
   private userId: number;
-  
-  private static SIGNUP_URL = "/api/auth/signup";
-  private static SIGNIN_URL = "/api/auth/signin";
-  private static REFRESH_TOKEN_URL = "/api/auth/token/refresh";
-  
+  private static localhost = "http://localhost:8080";
+  private static SIGNUP_URL = AuthService.localhost + "/api/auth/signup";
+  private static SIGNIN_URL = AuthService.localhost + "/api/auth/signin";
+  private static REFRESH_TOKEN_URL = AuthService.localhost + "/api/auth/token/refresh";
+
   constructor(private http: Http) {
     super();
     if(sessionStorage.getItem('user')) {
       this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
     }
   }
+
 
   public signUp(username: string, email: string, password: string) {
 
@@ -36,9 +37,12 @@ export class AuthService extends ReplaySubject<string> {
       password: password
     });
 
+    console.log("param :", requestParam);
+
     return this.http.post(AuthService.SIGNUP_URL,
       requestParam, this.generateOptions())
         .map((res: Response) => {
+          console.log("res :", res);
           this.saveToken(res);
           this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
         }).catch(error => {

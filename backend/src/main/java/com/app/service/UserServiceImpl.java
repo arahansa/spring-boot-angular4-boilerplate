@@ -52,9 +52,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        if(!userRepository.exists(user.getId())) {
+        if(user.getId()==null || !userRepository.exists(user.getId())) {
             user.setPassword(passwordEncoder().encode(user.getPassword()));
         }
+
         return userRepository.save(user);
     }
 
