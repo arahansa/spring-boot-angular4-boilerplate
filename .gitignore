@@ -13,3 +13,4 @@ backend/src/main/resources/public/*
 frontend/node_modules/
 frontend/dist/
 
+frontend_mine/.idea
